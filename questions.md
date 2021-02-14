@@ -1,6 +1,6 @@
 This document is for brainstorming questions to be used in homework 4, coding-quiz. 
 
-1. Choose the statement which is the opposite of the following (i >= 8 && i <= 20)
+1. Choose the statement which is equivalent to the following (i >= 8 && i <= 20)
     (!i < 8 || !i > 20)
 
 2. Is the following statement true or false? ("2" == 2)
@@ -18,7 +18,7 @@ This document is for brainstorming questions to be used in homework 4, coding-qu
 6. In javascript, every function is also a(n) (argument, method, parameter, operator)
     method
 
-7. What will the following display. var x = true - 5; console.log(x);
+7. What is the value of x? var x = true - 5;
     -4
 
 8. The following is a for loop
