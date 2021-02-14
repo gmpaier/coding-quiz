@@ -62,7 +62,7 @@ This document is for brainstorming questions to be used in homework 4, coding-qu
 13. Is this true or false? var x = 0; boolean(x);
      false because x holds no value
 
-14. Is this true or false? var x = 6; bolean(x);
+14. Is this true or false? var x = 6; boolean(x);
      true because x holds value (6)
 
 
