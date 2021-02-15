@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href=style0.css rel="stylesheet">
+</head>
+<body>
+    <header class="container-fluid text-center">
+        <h2>Javascript Code Quiz</h2>
+    </header>
+    <br>
+
+    <article>
+        <div class = "row" id = "row1">
+            <div class ="col-sm-8 mx-auto">
+                    <div class="card border-dark text-center">
+                    <div class="card-body">
+                    <h4 class="card-title" id="question-title">Question</h4>
+                    <i><p class="card-text" id="question-text">I'll be displaying a question to the user.</p></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class= "row" id = "row2">
+            <div class="col-sm-6">
+                <div class="card border-primary text-center">
+                  <div class="card-body">
+                    <p class="card-text" id="a-text">I hold the text for answer A.</p>
+                    <button type="button" class="btn btn-primary" id="a-button">A</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="card border-warning text-center">
+                  <div class="card-body">
+                    <p class="card-text" id="b-text">I hold the text for answer B.</p>
+                    <button type="button" class="btn btn-warning" id="b-button">B</button>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <br>
+
+        <div class = "row" id = "row3">
+            <div class="col-sm-6">
+                <div class="card border-danger text-center">
+                  <div class="card-body">
+                    <p class="card-text" id="c-text">I hold the text for answer C.</p>
+                    <a href="#" class="btn btn-danger" id="c-button">C</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="card border-success text-center">
+                  <div class="card-body">
+                    <p class="card-text" id="d-text">I hold the text for answer D.</p>
+                    <a href="#" class="btn btn-success" id="d-button">D</a>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <br>
+
+        <div class = "row" id="row4">
+            <div class="d-grid gap-2 col-2 mx-auto">
+                <button type="button" class="btn btn-outline-dark" id="skip-button">Skip</button>
+            </div>
+        </div>
+
+    </article>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
