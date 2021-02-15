@@ -12,11 +12,19 @@
 
     <article>
         <div class = "row" id = "row1">
-            <div class ="col-sm-8 mx-auto">
-                    <div class="card border-dark text-center">
+            <div class ="col-sm-8 offset-2" id="col11">
+                <div class="card border-dark text-center">
                     <div class="card-body">
-                    <h4 class="card-title" id="question-title">Question</h4>
-                    <i><p class="card-text" id="question-text">I'll be displaying a question to the user.</p></i>
+                        <h4 class="card-title" id="question-title">Question</h4>
+                        <i><p class="card-text" id="question-text">I'll be displaying a question to the user.</p></i>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-sm-1" id="col12">
+                <div class="card border-secondary text-center">
+                    <div class="card-body">
+                        <h6 class="card-title">Time Left</h6>
+                        <p class="card-text" id="timer-text">100</p>
                     </div>
                 </div>
             </div>
@@ -24,16 +32,16 @@
         <br>
 
         <div class= "row" id = "row2">
-            <div class="col-sm-6">
-                <div class="card border-primary text-center">
+            <div class="col-sm-6" id="col21">
+                <div class="card border-danger text-center">
                   <div class="card-body">
                     <p class="card-text" id="a-text">I hold the text for answer A.</p>
-                    <button type="button" class="btn btn-primary" id="a-button">A</button>
+                    <button type="button" class="btn btn-danger" id="a-button">A</button>
                   </div>
                 </div>
               </div>
 
-              <div class="col-sm-6">
+              <div class="col-sm-6" id="col22">
                 <div class="card border-warning text-center">
                   <div class="card-body">
                     <p class="card-text" id="b-text">I hold the text for answer B.</p>
@@ -45,20 +53,20 @@
         <br>
 
         <div class = "row" id = "row3">
-            <div class="col-sm-6">
-                <div class="card border-danger text-center">
+            <div class="col-sm-6" id="col31">
+                <div class="card border-primary text-center">
                   <div class="card-body">
                     <p class="card-text" id="c-text">I hold the text for answer C.</p>
-                    <a href="#" class="btn btn-danger" id="c-button">C</a>
+                    <button type="button" class="btn btn-primary" id="c-button">C</button>
                   </div>
                 </div>
               </div>
 
-              <div class="col-sm-6">
+              <div class="col-sm-6" id="col32">
                 <div class="card border-success text-center">
                   <div class="card-body">
                     <p class="card-text" id="d-text">I hold the text for answer D.</p>
-                    <a href="#" class="btn btn-success" id="d-button">D</a>
+                    <button type="button" class="btn btn-success" id="d-button">D</button>
                   </div>
                 </div>
               </div>

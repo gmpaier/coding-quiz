@@ -1,4 +1,7 @@
 body {
     margin: 10px 10px 10px 10px;
-    font-style: ita
+}
+
+#timer-text {
+    font-weight: bold;
 }

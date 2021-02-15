@@ -1,3 +1,5 @@
+//variable declaration
+
 var question1 = {
     qText = "Choose the statement which is equivalent to the following (i >= 8 && i <= 20)",
     answerA = "(!(i >= 8 || i <= 20))",
@@ -92,6 +94,32 @@ var questionList = [question1, question2, question3, question4, question5, quest
 
 var startButton = $("#start-button");
 
+//functions
 function gameStart(){
-
+    //main runtime function
+    //loadGame();
 }
+
+function loadStart(){
+    //styles page to match original layout 
+}
+
+function loadGame(){
+    //styles page to match gameplay template
+}
+
+function loadRules(){
+    //styles page to match how-to-play template
+}
+
+function gameOver(){
+    //styles page to match game_over template
+    //triggers when timer hits zero
+}
+
+function loadScore(){
+    //styles page to match log_score template
+}
+
+//runtime
+startButton.on("click", gameStart);
