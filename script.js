@@ -93,6 +93,8 @@ var question10 = {
 var questionList = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 var q = 0;
 var rightAnswer;
+var tval;
+var count;
 
 //functions
 function gameStart(){
@@ -106,12 +108,13 @@ function gameStart(){
 }
 
 function timer(){
-    var count = 10;
+    count = 120;
     $("#timer-text").text(count);
-    var tval = setInterval(function(){
+    tval = setInterval(function(){
         if (count > 0){
             count--;
             $("#timer-text").text(count);
+            $("timer-text").attr("color", "black");
         }
         else {
             clearInterval(tval);
@@ -129,10 +132,28 @@ function getQuestion(i){
     $("#c-text").text(currentQ.answerC);
     $("#d-text").text(currentQ.answerD);
     rightAnswer = currentQ.value;
+    $("#a-button").removeAttr("disabled");
+    $("#b-button").removeAttr("disabled");
+    $("#c-button").removeAttr("disabled");
+    $("#d-button").removeAttr("disabled");
 }
 
 function checkAnswer(){
-
+    let userAnswer = $(this).attr("value");
+    if (userAnswer === rightAnswer){
+        q++;
+        getQuestion(q);
+    }
+    else {
+        console.log("else");
+        count -= 5;
+        $(this).attr("disabled", "true");
+        if (count < 0){
+            count = 0;
+        }
+        $("#timer-text").text(count);
+        $("timer-text").attr("color", "red");
+    }
 }
 
 function loadGame(){
