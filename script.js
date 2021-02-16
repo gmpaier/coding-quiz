@@ -91,24 +91,60 @@ var question10 = {
 }
 
 var questionList = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
-
-
+var q = 0;
+var rightAnswer;
 
 //functions
 function gameStart(){
     //main runtime function
     loadGame();
+    q = 0;
+    rightAnswer = null;
+    getQuestion(q);
+    timer();
+
+}
+
+function timer(){
+    var count = 10;
+    $("#timer-text").text(count);
+    var tval = setInterval(function(){
+        if (count > 0){
+            count--;
+            $("#timer-text").text(count);
+        }
+        else {
+            clearInterval(tval);
+            gameOver();
+        }
+    }, 1000);
+
+}
+
+function getQuestion(i){
+    var currentQ = questionList[i];
+    $("#question-text").text(currentQ.qText);
+    $("#a-text").text(currentQ.answerA);
+    $("#b-text").text(currentQ.answerB);
+    $("#c-text").text(currentQ.answerC);
+    $("#d-text").text(currentQ.answerD);
+    rightAnswer = currentQ.value;
+}
+
+function checkAnswer(){
+
 }
 
 function loadGame(){
     //styles page to match gameplay template
     clearRows();
 
-    $("#row1").html("<div class =\"col-sm-8 offset-2\" id=\"col11\"><div class=\"card border-dark text-center\"><div class=\"card-body\"><h4 class=\"card-title\" id=\"question-title\">Question</h4><i><p class=\"card-text\" id=\"question-text\">I'll be displaying a question to the user.</p></i></div></div></div><div class = \"col-sm-1\" id=\"col12\"><div class=\"card border-secondary text-center\"><div class=\"card-body\"><h6 class=\"card-title\">Time Left</h6><p class=\"card-text\" id=\"timer-text\">100</p></div></div></div>");
+    $("#row1").html("<div class =\"col-sm-8 offset-2\" id=\"col11\"><div class=\"card border-dark text-center\"><div class=\"card-body\"><h4 class=\"card-title\" id=\"question-title\">Question</h4><i><p class=\"card-text\" id=\"question-text\"></p></i></div></div></div><div class = \"col-sm-1\" id=\"col12\"><div class=\"card border-secondary text-center\"><div class=\"card-body\"><h6 class=\"card-title\">Time Left</h6><p class=\"card-text\" id=\"timer-text\"></p></div></div></div>");
 
-    $("#row2").html("<div class=\"col-sm-6\" id=\"col21\"><div class=\"card border-danger text-center\"><div class=\"card-body\"><p class=\"card-text\" id=\"a-text\">I hold the text for answer A.</p><button type=\"button\" class=\"btn btn-danger\" id=\"a-button\">A</button></div></div></div><div class=\"col-sm-6\" id=\"col22\"><div class=\"card border-warning text-center\"><div class=\"card-body\"><p class=\"card-text\" id=\"b-text\">I hold the text for answer B.</p><button type=\"button\" class=\"btn btn-warning\" id=\"b-button\">B</button></div></div></div>");
+    $("#row2").html("<div class=\"col-sm-6\" id=\"col21\"><div class=\"card border-danger text-center\"><div class=\"card-body\"><p class=\"card-text\" id=\"a-text\"></p><button type=\"button\" class=\"btn btn-danger\" id=\"a-button\" value=\"a\">A</button></div></div></div><div class=\"col-sm-6\" id=\"col22\"><div class=\"card border-warning text-center\"><div class=\"card-body\"><p class=\"card-text\" id=\"b-text\"></p><button type=\"button\" class=\"btn btn-warning\" id=\"b-button\" value=\"b\">B</button></div></div></div>");
 
-    $("#row3").html("<div class=\"col-sm-6\" id=\"col31\"><div class=\"card border-primary text-center\"><div class=\"card-body\"><p class=\"card-text\" id=\"c-text\">I hold the text for answer C.</p><button type=\"button\" class=\"btn btn-primary\" id=\"c-button\">C</button></div></div></div><div class=\"col-sm-6\" id=\"col32\"><div class=\"card border-success text-center\"><div class=\"card-body\"><p class=\"card-text\" id=\"d-text\">I hold the text for answer D.</p><button type=\"button\" class=\"btn btn-success\" id=\"d-button\">D</button></div></div></div>");
+    $("#row3").html("<div class=\"col-sm-6\" id=\"col31\"><div class=\"card border-primary text-center\"><div class=\"card-body\"><p class=\"card-text\" id=\"c-text\"></p><button type=\"button\" class=\"btn btn-primary\" id=\"c-button\" value=\"c\">C</button></div></div></div><div class=\"col-sm-6\" id=\"col32\"><div class=\"card border-success text-center\"><div class=\"card-body\"><p class=\"card-text\" id=\"d-text\"></p><button type=\"button\" class=\"btn btn-success\" id=\"d-button\" value=\"d\">D</button></div></div></div>");
+
     $("#row4").html("<div class=\"d-grid gap-2 col-2 mx-auto\"><button type=\"button\" class=\"btn btn-outline-dark\" id=\"skip-button\">Skip</button></div>");
 
     $("h1").replaceWith("<h2>Javascript Code Quiz</h2>");
@@ -148,3 +184,10 @@ function clearRows(){
 
 //runtime
 $("#start-button").on("click", gameStart);
+$("#rule-button").on("click", loadRules);
+//$("#score-button").on("click", loadScore);
+$(document).on("click", "#back-button", function(){location.reload()});
+$(document).on("click", "#a-button", checkAnswer);
+$(document).on("click", "#b-button", checkAnswer);
+$(document).on("click", "#c-button", checkAnswer);
+$(document).on("click", "#d-button", checkAnswer);
