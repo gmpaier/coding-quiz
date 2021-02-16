@@ -1,0 +1,10 @@
+row 1
+n/A
+
+row 2
+<div class =\"col-sm-8 mx-auto\"><div class=\"card border-dark text-center\"><div class=\"card-body\"><h2 class=\"card-title\" id=\"question-title\">Game Over</h2><i><p class=\"card-text\" id=\"question-text\">Try Again?</p></i></div></div></div>
+
+row 3
+<div class=\"d-grid gap-2 col-2 mx-auto\"><button type=\"button\" class=\"btn btn-outline-dark\" id=\"back-button\">Back</button></div>
+
+row 4
