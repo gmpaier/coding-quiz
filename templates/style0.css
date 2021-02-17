@@ -5,3 +5,7 @@ body {
 #timer-text {
     font-weight: bold;
 }
+
+#victory {
+    color: green;
+}
