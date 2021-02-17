@@ -94,11 +94,22 @@ var question10 = {
 var questionList = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 
 var q = 0; //question index
-
 var answer; //stores correct response
 
 var tval; //setInterval variable, timer interval aka tval
 var count; 
+
+var userData = {
+    initials: "",
+    score: ""
+}
+
+if (localStorage.getItem("quizScores") === null){
+    var saveData = null;
+}
+else {
+    var saveData = JSON.parse(localStorage.getItem("quizScores"));
+}
 
 //functions
     
@@ -128,7 +139,6 @@ function getQuestion(i){
         $("#d-button").removeAttr("disabled");
     }
     else {
-        clearInterval(tval);
         victory();
     }
 }
@@ -172,8 +182,9 @@ function skipQuestion(){
 }
 
 function victory(){
+    clearInterval(tval);
     logScore();
-    
+    userData.score = count;
 }
 
 function loadGame(){    //styles page to match gameplay template
@@ -188,6 +199,37 @@ function loadGame(){    //styles page to match gameplay template
     $("#row4").html("<div class=\"d-grid gap-2 col-2 mx-auto\"><button type=\"button\" class=\"btn btn-outline-dark\" id=\"skip-button\">Skip</button></div>");
 
     $("h1").replaceWith("<h2>Javascript Code Quiz</h2>");
+}
+
+function loadScore(){   //styles page to match high-score template
+    clearRows();
+
+    $("#row1").html("<h1 id=\"high-score\">High Score</h1>");
+
+    $("#row4").html("<div class=\"d-grid gap-2 col-2 mx-auto\"><button type=\"button\" class=\"btn btn-outline-dark\" id=\"back-button\">Back</button></div>");
+
+    $("#row1").attr("class", "text-center");
+
+    $("#row2").attr("class", "text-center");
+
+    $("#row3").attr("class", "text-center");
+
+    if (saveData === null){
+
+        $("#row2").html("<p>No recorded scores found. Please note resetting browser cookies will delete any saved score.</p>");
+        
+    }
+
+    else {
+        
+        $("#row2").html("<h2>User: <span id=\"initial-text\"></span></h2>");
+
+        $("#row3").html("<h2>Score: <span id=\"score-text\"></span></h2>");
+        
+        //$("#initial-text").text(saveData.initials);
+
+        //$("#score-text").text(saveData.score);
+    }
 }
 
 function loadRules(){   //styles page to match how-to-play template
@@ -232,7 +274,7 @@ function clearRows(){
 //runtime
 $("#start-button").on("click", gameStart);
 $("#rule-button").on("click", loadRules);
-//$("#score-button").on("click", loadScore);
+$("#score-button").on("click", loadScore);
 $(document).on("click", "#back-button", function(){location.reload()});
 $(document).on("click", "#a-button", checkAnswer);
 $(document).on("click", "#b-button", checkAnswer);

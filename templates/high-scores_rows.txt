@@ -1,0 +1,11 @@
+row 1
+<h1 id=\"high-score\">High Score</h1>
+
+row 2
+<h2>User: <span id=\"initial-text\"></span></h2>
+
+row 3
+<h2>Score: <span id=\"score-text\"></span></h2>
+
+row 4
+<div class=\"d-grid gap-2 col-2 mx-auto\"><button type=\"button\" class=\"btn btn-outline-dark\" id=\"back-button\">Back</button></div>
