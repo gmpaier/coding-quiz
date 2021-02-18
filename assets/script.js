@@ -99,6 +99,7 @@ var answer; //stores correct response
 var tval; //setInterval variable, timer interval aka tval
 var count; //timer count
 
+//letters array used for inputting user initials
 var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ];
 
 var i = 0;  //first initial index
@@ -111,10 +112,10 @@ var userData = {
 }
 
 if (localStorage.getItem("quizScores") === null){
-    var saveData = null;
+    var saveData = null;    //if there is no saved data
 }
 else {
-    var saveData = JSON.parse(localStorage.getItem("quizScores"));
+    var saveData = JSON.parse(localStorage.getItem("quizScores"));  //if saved data, loads saved data
 }
 
 //functions
@@ -128,7 +129,7 @@ function gameStart(){   //main runtime function
     timer();
 }
 
-function getQuestion(x){
+function getQuestion(x){    //loads next question and checks if user has finished quiz
     if (x < questionList.length){
         var currentQ = questionList[x];
         $("#question-text").text(currentQ.qText);
@@ -144,12 +145,12 @@ function getQuestion(x){
         $("#c-button").removeAttr("disabled");
         $("#d-button").removeAttr("disabled");
     }
-    else {
+    else {      //triggers win condition when no more questions
         victory();
     }
 }
 
-function timer(){
+function timer(){     //main game timer
     count = 120;
     $("#timer-text").text(count);
     tval = setInterval(function(){
@@ -166,7 +167,7 @@ function timer(){
 
 }
 
-function checkAnswer(){
+function checkAnswer(){     //compares user answer to correct answer, subtracts time off counter if incorrect
     let userResponse = $(this).attr("value");
     if (userResponse === answer){
         q++;
@@ -183,20 +184,20 @@ function checkAnswer(){
     }
 }
 
-function skipQuestion(){
+function skipQuestion(){    //skips question, adds to end of queue
     questionList.push(questionList[q]);
     q++
     getQuestion(q);
 
 }
 
-function victory(){ 
+function victory(){     //triggers on victory, clears timer
     clearInterval(tval);
     logScore();
     userData.score = count;
 }
 
-function nextLetter(){
+function nextLetter(){      //function for inputting initials, moves to next letter in alphabet
     switch (this.value){
         case "1":
             i++;
@@ -234,7 +235,7 @@ function nextLetter(){
     
 }
 
-function prevLetter(){
+function prevLetter(){      //function for inputting initials, moves to prev letter in alphabet
     switch (this.value){
         case "1":
             i--;
@@ -272,7 +273,7 @@ function prevLetter(){
 
 }
 
-function saveScore(){
+function saveScore(){       //saves score and initials on victory screen when user hits submit
     userData.initials = $("#init1").text()+$("#init2").text()+$("#init3").text();
     $("#initial-text").text(userData.initials);
     $("#score-text").text(userData.score);
@@ -326,7 +327,7 @@ function loadRules(){   //styles page to match how-to-play template
     
     clearRows();
 
-    $("#row2").html("<div class =\"col-sm-8 mx-auto\"><div class=\"card border-dark text-center\"><div class=\"card-body\"><h2 class=\"card-title\" id=\"question-title\">How to Play</h2><i><p class=\"card-text\" id=\"question-text\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, pariatur similique quos sit libero eos alias. Rerum optio ullam, eos molestiae quibusdam dolore tempora harum nulla, deserunt alias error quam!</p></i></div></div></div>");
+    $("#row2").html("<div class =\"col-sm-8 mx-auto\"><div class=\"card border-dark text-center\"><div class=\"card-body\"><h2 class=\"card-title\" id=\"question-title\">How to Play</h2><i><p class=\"card-text\" id=\"question-text\">This is a coding quiz to test your javascript knowledge. Upon hitting start, you will be presented with a question and four answers. There are ten questions in total and you begin with two minutes on the timer. If an incorrect answer is chosen, the button is disabled and five seconds will be subtracted from the timer. A correct answer will bring the next question. At any point a question can be skipped by hitting the \"skip\" button, and the question will be added to the back of the queue. The quiz is completed when all questions are answered. Your score is equal to the time you have remaining. If the timer reaches zero, you will recieve a game over.</p></i></div></div></div>");
 
     $("#row3").html("<div class=\"d-grid gap-2 col-2 mx-auto\"><button type=\"button\" class=\"btn btn-outline-success\" id=\"back-button\">Back</button></div>");
 
@@ -372,15 +373,22 @@ function clearRows(){
 }
 
 //runtime
+    //Start page buttons
 $("#start-button").on("click", gameStart);
 $("#rule-button").on("click", loadRules);
 $("#score-button").on("click", loadScore);
+
+    //back button, reloads page, used on multiple screens
 $(document).on("click", "#back-button", function(){location.reload()});
+
+    //quiz buttons
 $(document).on("click", "#a-button", checkAnswer);
 $(document).on("click", "#b-button", checkAnswer);
 $(document).on("click", "#c-button", checkAnswer);
 $(document).on("click", "#d-button", checkAnswer);
 $(document).on("click", "#skip-button", skipQuestion);
+
+    //logScore buttons
 $(document).on("click", ".nextBtn", nextLetter);
 $(document).on("click", ".prevBtn", prevLetter);
 $(document).on("click", "#submit-button", saveScore);
