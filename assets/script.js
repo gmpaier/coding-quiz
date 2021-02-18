@@ -157,7 +157,7 @@ function timer(){     //main game timer
         if (count > 0){
             count--;
             $("#timer-text").text(count);
-            //$("#timer-text").attr("color", "black");
+            $("#timer-text").css("color", "black");
         }
         else {
             clearInterval(tval);
@@ -180,7 +180,7 @@ function checkAnswer(){     //compares user answer to correct answer, subtracts 
             count = 0;
         }
         $("#timer-text").text(count);
-        //$("#timer-text").attr("color", "red");
+        $("#timer-text").css("color", "red");
     }
 }
 
