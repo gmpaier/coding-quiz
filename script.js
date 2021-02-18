@@ -21,7 +21,7 @@ var question2 = {
 
 var question3 = {
     qText: "Is the following true or false? (\"2\" < \"12\")",
-    responseA: "False, becuase values are compared as strings, and \"1\" is less than \"2\".",
+    responseA: "False, because values are compared as strings, and \"1\" is less than \"2\".",
     responseB: "False, because a string cannot be greater than a string.",
     responseC: "True, because values are compared as strings, and \"12\" is longer than \"2\".",
     responseD: "True, because 12 is greater than 2.",
@@ -97,9 +97,15 @@ var q = 0; //question index
 var answer; //stores correct response
 
 var tval; //setInterval variable, timer interval aka tval
-var count; 
+var count; //timer count
 
-var userData = {
+var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ];
+
+var i = 0;  //first initial index
+var j = 0;  //second initial index
+var k = 0;  //third initial index
+
+var userData = {    
     initials: "",
     score: ""
 }
@@ -122,9 +128,9 @@ function gameStart(){   //main runtime function
     timer();
 }
 
-function getQuestion(i){
-    if (i < questionList.length){
-        var currentQ = questionList[i];
+function getQuestion(x){
+    if (x < questionList.length){
+        var currentQ = questionList[x];
         $("#question-text").text(currentQ.qText);
         $("#a-text").text(currentQ.responseA);
         $("#b-text").text(currentQ.responseB);
@@ -178,13 +184,101 @@ function checkAnswer(){
 }
 
 function skipQuestion(){
+    questionList.push(questionList[q]);
+    q++
+    getQuestion(q);
 
 }
 
-function victory(){
+function victory(){ 
     clearInterval(tval);
     logScore();
     userData.score = count;
+}
+
+function nextLetter(){
+    switch (this.value){
+        case "1":
+            i++;
+            if (i >= letters.length){
+                i = 0;
+                $("#init1").text(letters[i]);
+            }
+            else {
+                $("#init1").text(letters[i]);
+            }
+            break;
+        case "2":
+            j++;
+            if (j >= letters.length){
+                j = 0;
+                $("#init2").text(letters[j]);
+            }
+            else {
+                $("#init2").text(letters[j]);
+            }
+            break;
+        case "3":
+            k++;
+            if (k >= letters.length){
+                k = 0;
+                $("#init3").text(letters[k]);
+            }
+            else {
+                $("#init3").text(letters[k]);
+            }
+            break;
+        default:
+            alert("There seems to be an error?");
+    }
+    
+}
+
+function prevLetter(){
+    switch (this.value){
+        case "1":
+            i--;
+            if (i < 0){
+                i = 25;
+                $("#init1").text(letters[i]);
+            }
+            else {
+                $("#init1").text(letters[i]);
+            }
+            break;
+        case "2":
+            j--;
+            if (j < 0){
+                j = 25;
+                $("#init2").text(letters[j]);
+            }
+            else {
+                $("#init2").text(letters[j]);
+            }
+            break;
+        case "3":
+            k--;
+            if (k < 0){
+                k = 25;
+                $("#init3").text(letters[k]);
+            }
+            else {
+                $("#init3").text(letters[k]);
+            }
+            break;
+        default:
+            alert("There seems to be an error?");
+    }
+
+}
+
+function saveScore(){
+    userData.initials = $("#init1").text()+$("#init2").text()+$("#init3").text();
+    $("#initial-text").text(userData.initials);
+    $("#score-text").text(userData.score);
+    localStorage.setItem("quizScores", JSON.stringify(userData));
+    $("#row2").empty();
+    $("#row2").html("<h2>Your score has been saved!</h2>");   
 }
 
 function loadGame(){    //styles page to match gameplay template
@@ -208,11 +302,7 @@ function loadScore(){   //styles page to match high-score template
 
     $("#row4").html("<div class=\"d-grid gap-2 col-2 mx-auto\"><button type=\"button\" class=\"btn btn-outline-dark\" id=\"back-button\">Back</button></div>");
 
-    $("#row1").attr("class", "text-center");
-
-    $("#row2").attr("class", "text-center");
-
-    $("#row3").attr("class", "text-center");
+    $("#row1, #row2, #row3").attr("class", "text-center");
 
     if (saveData === null){
 
@@ -226,9 +316,9 @@ function loadScore(){   //styles page to match high-score template
 
         $("#row3").html("<h2>Score: <span id=\"score-text\"></span></h2>");
         
-        //$("#initial-text").text(saveData.initials);
+        $("#initial-text").text(saveData.initials);
 
-        //$("#score-text").text(saveData.score);
+        $("#score-text").text(saveData.score);
     }
 }
 
@@ -258,13 +348,23 @@ function logScore(){   //styles page to match log_score template
     
     clearRows();
 
-    $("#row1").html("<div class =\"col-sm-8 offset-2\" id=\"col11\"><div class=\"card border-dark text-center\"><div class=\"card-body\"><h4 class=\"card-title\" id=\"victory\">Congratulations!</h4><p class=\"card-text\">You've completed the quiz! Enter your initials below and hit submit to save your score. Please note saving a new score will delete the prior score.</p></div></div></div><div class=\"col-sm-1\" id=\"col12\"><div class=\"card border-secondary text-center\"><div class=\"card-body\"><h6 class=\"card-title\">Score</h6><p class=\"card-text\" id=\"timer-text\">100</p></div></div></div>");
+    $("#row1").html("<div class =\"col-sm-8 offset-2\" id=\"col11\"><div class=\"card border-dark text-center\"><div class=\"card-body\"><h4 class=\"card-title\" id=\"victory\">Congratulations!</h4><p class=\"card-text\">You've completed the quiz! Enter your initials below and hit submit to save your score. Please note saving a new score will delete the prior score.</p></div></div></div><div class=\"col-sm-1\" id=\"col12\"><div class=\"card border-secondary text-center\"><div class=\"card-body\"><h6 class=\"card-title\">Score</h6><p class=\"card-text\" id=\"timer-text\"></p></div></div></div>");
 
-    $("#row2").html("<div class=\"row text-center\"><div class=\"col text-center\"><button id=\"nextBtn1\">Next</button><br><h1 id=\"init1\">A</h1><br><button id=\"prevBtn1\">Prev</button></div><div class=\"col text-center\"><button id=\"nextBtn2\">Next</button><br><h1 id=\"init2\">A</h1><br><button id=\"prevBtn2\">Prev</button></div><div class=\"col text-center\"><button id=\"nextBtn3\">Next</button><br><h1 id=\"init3\">A</h1><br><button id=\"prevBtn3\">Prev</button></div></div><div class=\"row mx-auto\"><div class=\"d-grid gap-2 col-2 mx-auto\"><br><button type=\"button\" class=\"btn btn-primary\" id=\"submit-button\">Submit</button></div></div>");
+    $("#row2").html("<div class=\"row text-center\"><div class=\"col text-center\"><button class=\"nextBtn\" value=\"1\">Next</button><br><h1 id=\"init1\">A</h1><br><button class=\"prevBtn\" value=\"1\">Prev</button></div><div class=\"col text-center\"><button class=\"nextBtn\" value=\"2\">Next</button><br><h1 id=\"init2\">A</h1><br><button class=\"prevBtn\" value=\"2\">Prev</button></div><div class=\"col text-center\"><button class=\"nextBtn\" value=\"3\">Next</button><br><h1 id=\"init3\">A</h1><br><button class=\"prevBtn\" value=\"3\">Prev</button></div></div><div class=\"row mx-auto\"><div class=\"d-grid gap-2 col-2 mx-auto\"><br><button type=\"button\" class=\"btn btn-primary\" id=\"submit-button\">Submit</button></div></div>");
 
     $("#row3").html("<h1 id=\"initial-text\"></h1><br><h1 id=\"score-text\"></h1>");
 
     $("#row4").html("<div class=\"d-grid gap-2 col-2 mx-auto\"><button type=\"button\" class=\"btn btn-outline-dark\" id=\"back-button\">Back</button></div>");
+
+    $("#timer-text").text(count);
+
+    $("#row3, #row2").attr("class", "text-center");
+
+    if (!(saveData === null)){
+        $("#initial-text").text(saveData.initials);
+
+        $("#score-text").text(saveData.score);
+    }
 }
 
 function clearRows(){ 
@@ -281,3 +381,6 @@ $(document).on("click", "#b-button", checkAnswer);
 $(document).on("click", "#c-button", checkAnswer);
 $(document).on("click", "#d-button", checkAnswer);
 $(document).on("click", "#skip-button", skipQuestion);
+$(document).on("click", ".nextBtn", nextLetter);
+$(document).on("click", ".prevBtn", prevLetter);
+$(document).on("click", "#submit-button", saveScore);
