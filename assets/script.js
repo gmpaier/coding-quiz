@@ -4,8 +4,8 @@
 var question1 = {
     qText: "Choose the statement which is equivalent to the following (i >= 8 && i <= 20)",
     responseA: "(!(i >= 8 || i <= 20))",
-    responseB: "(!i < 8 || !i > 20)",
-    responseC: "(!i < 8 && !i > 20)",
+    responseB: "(!(i < 8 || i > 20))",
+    responseC: "(!(i < 8 && i > 20))",
     responseD: "(!(i >= 8 && i <=20))",
     value: "b"
 }
